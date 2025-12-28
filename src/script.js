@@ -15,17 +15,152 @@ const canvas = document.querySelector('canvas.webgl')
 // Scene
 const scene = new THREE.Scene()
 
+
+//  Textures
+const textureLoader = new THREE.TextureLoader()
+
+// floor
+const floorAlphaTexture = textureLoader.load('./floor/alpha.jpg')
+
+const floorColorTexture = textureLoader.load('./floor/aerial_rocks_04/aerial_rocks_04_diff_1k.jpg')
+const floorARMTexture = textureLoader.load('./floor/aerial_rocks_04/aerial_rocks_04_arm_1k.jpg')
+const floorNormalTexture = textureLoader.load('./floor/aerial_rocks_04/aerial_rocks_04_nor_gl_1k.jpg')
+const floorDisplacementTexture = textureLoader.load('./floor/aerial_rocks_04/aerial_rocks_04_disp_1k.jpg')
+
+floorColorTexture.colorSpace = THREE.SRGBColorSpace
+
+
+
+
+floorColorTexture.repeat.set(8, 8)
+floorARMTexture.repeat.set(8, 8)
+floorNormalTexture.repeat.set(8, 8)
+floorDisplacementTexture.repeat.set(8, 8)
+
+floorColorTexture.wrapS = THREE.RepeatWrapping
+floorColorTexture.wrapT = THREE.RepeatWrapping
+
+floorARMTexture.wrapS = THREE.RepeatWrapping
+floorARMTexture.wrapT = THREE.RepeatWrapping
+
+floorNormalTexture.wrapS = THREE.RepeatWrapping
+floorNormalTexture.wrapT = THREE.RepeatWrapping
+
+floorDisplacementTexture.wrapS = THREE.RepeatWrapping
+floorDisplacementTexture.wrapT = THREE.RepeatWrapping
+
+// wall texture
+const wallColorTexture = textureLoader.load('./wall/mossy_brick_1k/mossy_brick_diff_1k.jpg')
+const wallARMTexture = textureLoader.load('./wall/mossy_brick_1k/mossy_brick_arm_1k.jpg')
+const wallNormalTexture = textureLoader.load('./wall/mossy_brick_1k/mossy_brick_nor_gl_1k.jpg')
+
+wallColorTexture.colorSpace = THREE.SRGBColorSpace
+
+wallColorTexture.repeat.set(2, 2)
+wallARMTexture.repeat.set(2, 2)
+wallNormalTexture.repeat.set(2, 2)
+
+wallColorTexture.wrapS = THREE.RepeatWrapping
+wallColorTexture.wrapT = THREE.RepeatWrapping
+
+wallARMTexture.wrapS = THREE.RepeatWrapping
+wallARMTexture.wrapT = THREE.RepeatWrapping
+
+wallNormalTexture.wrapS = THREE.RepeatWrapping
+wallNormalTexture.wrapT = THREE.RepeatWrapping
+
+// roof texure
+const roofColorTexture = textureLoader.load('./roof/roof_slates_02_1k/roof_slates_02_diff_1k.jpg')
+const roofARMTexture = textureLoader.load('./roof/roof_slates_02_1k/roof_slates_02_arm_1k.jpg')
+const roofNormalTexture = textureLoader.load('./roof/roof_slates_02_1k/roof_slates_02_nor_gl_1k.jpg')
+
+roofColorTexture.colorSpace = THREE.SRGBColorSpace
+
+roofColorTexture.repeat.set(3,1)
+roofARMTexture.repeat.set(3,1)
+roofNormalTexture.repeat.set(3,1)
+
+roofColorTexture.wrapS = THREE.RepeatWrapping
+roofARMTexture.wrapS = THREE.RepeatWrapping
+roofNormalTexture.wrapS = THREE.RepeatWrapping
+
+// bush texture
+
+const bushColorTexture = textureLoader.load('./bush/sparse_grass_1k/sparse_grass_diff_1k.jpg')
+const bushARMTexture = textureLoader.load('./bush/sparse_grass_1k/sparse_grass_arm_1k.jpg')
+const bushNormalTexture = textureLoader.load('./bush/sparse_grass_1k/sparse_grass_nor_gl_1k.jpg')
+
+bushColorTexture.colorSpace = THREE.SRGBColorSpace
+
+bushColorTexture.repeat.set(4,4)
+bushARMTexture.repeat.set(4,4)
+bushNormalTexture.repeat.set(4,4)
+
+bushColorTexture.wrapS = THREE.RepeatWrapping
+bushColorTexture.wrapT = THREE.RepeatWrapping
+
+bushARMTexture.wrapS = THREE.RepeatWrapping
+bushARMTexture.wrapT = THREE.RepeatWrapping
+
+bushNormalTexture.wrapS = THREE.RepeatWrapping
+bushNormalTexture.wrapT = THREE.RepeatWrapping
+
+// door texture
+const doorColorTexture = textureLoader.load('./door/color.jpg')
+const doorAOTexture = textureLoader.load('./door/ambientOcclusiono.jpg')
+const doorNormalTexture = textureLoader.load('./door/normal.jpg')
+const doorMetalnessTexture = textureLoader.load('./door/metalness.jpg')
+const doorRoughnessTexture = textureLoader.load('./door/roughness.jpg')
+const doorAlphaTexture = textureLoader.load('./door/alpha.jpg')
+const doorHeightTexture = textureLoader.load('./door/height.jpg')
+
+doorColorTexture.colorSpace = THREE.SRGBColorSpace
+
+
+// graves texture
+const graveColorTexture = textureLoader.load('./graves/plastered_stone_wall_1k/plastered_stone_wall_diff_1k.jpg')
+const graveARMTexture = textureLoader.load('./graves/plastered_stone_wall_1k/plastered_stone_wall_arm_1k.jpg')
+const graveNormalTexture = textureLoader.load('./graves/plastered_stone_wall_1k/plastered_stone_wall_nor_gl_1k.jpg')
+
+graveColorTexture.colorSpace = THREE.SRGBColorSpace
+
+// graveColorTexture.repeat.set(4,4)
+// graveARMTexture.repeat.set(4,4)
+// graveNormalTexture.repeat.set(4,4)
+
+// graveColorTexture.wrapS = THREE.RepeatWrapping
+// graveColorTexture.wrapT = THREE.RepeatWrapping
+
+// graveARMTexture.wrapS = THREE.RepeatWrapping
+// graveARMTexture.wrapT = THREE.RepeatWrapping
+
+// graveNormalTexture.wrapS = THREE.RepeatWrapping
+// graveNormalTexture.wrapT = THREE.RepeatWrapping
+
 /**
  * House
  */
 
 //  Floor
 const floor = new THREE.Mesh(
-    new THREE.PlaneGeometry(20, 20),
-    new THREE.MeshStandardMaterial()
+    new THREE.PlaneGeometry(20, 20,100, 100),
+    new THREE.MeshStandardMaterial({
+        alphaMap: floorAlphaTexture,
+        transparent: true,
+        map: floorColorTexture,
+        aoMap: floorARMTexture,
+        roughnessMap: floorARMTexture,
+        metalnessMap: floorARMTexture,
+        normalMap: floorNormalTexture,
+        displacementMap: floorDisplacementTexture,
+        displacementScale: 0.2,
+        displacementBias: -0.1,
+    })
 )
 floor.rotation.x = - Math.PI * 0.5
 scene.add(floor)
+gui.add(floor.material, 'displacementScale').min(0).max(1).step(0.001).name('floorDisplacementScale')
+gui.add(floor.material, 'displacementBias').min(-1).max(1).step(0.001).name('floorDisplacementBias')
 
 //  House container
 
@@ -35,7 +170,14 @@ scene.add(house)
 //  walls
 const walls = new THREE.Mesh(
     new THREE.BoxGeometry(4, 2.5, 4),
-    new THREE.MeshStandardMaterial()
+    new THREE.MeshStandardMaterial({
+        map: wallColorTexture,
+        aoMap: wallARMTexture,
+        roughnessMap: wallARMTexture,
+        metalnessMap: wallARMTexture,
+        normalMap: wallNormalTexture
+        
+    })
 )
 walls.position.y = 1.25
 house.add(walls)
@@ -43,7 +185,13 @@ house.add(walls)
 // roof 
 const roof = new THREE.Mesh(
     new THREE.ConeGeometry(3.5, 1.5, 4),
-    new THREE.MeshStandardMaterial()
+    new THREE.MeshStandardMaterial({
+        map: roofColorTexture,
+        aoMap: roofARMTexture,
+        roughnessMap: roofARMTexture,
+        metalnessMap: roofARMTexture,
+        normalMap: roofNormalTexture
+    })
 )
 roof.position.y = 2.5 + 0.75
 roof.rotation.y = Math.PI * 0.25
@@ -52,7 +200,16 @@ house.add(roof)
 //  Door
 const door = new THREE.Mesh(
     new THREE.PlaneGeometry(2.2, 2.2),
-    new THREE.MeshStandardMaterial()
+    new THREE.MeshStandardMaterial({
+        map: doorColorTexture,
+        aoMap: doorAOTexture,
+        roughnessMap: doorRoughnessTexture,
+        metalnessMap: doorMetalnessTexture,
+        normalMap: doorNormalTexture,
+        alphaMap: doorAlphaTexture,
+        displacementMap: doorHeightTexture,
+        transparent: true,
+    })
 )
 door.position.y = 1
 door.position.z = 2 + 0.01
@@ -60,7 +217,13 @@ house.add(door)
 
 // bushes
 const bushGeometry = new THREE.SphereGeometry(1, 16, 16)
-const bushMaterial = new THREE.MeshStandardMaterial()
+const bushMaterial = new THREE.MeshStandardMaterial({
+    map: bushColorTexture,
+    aoMap: bushARMTexture,
+    roughnessMap: bushARMTexture,
+    metalnessMap: bushARMTexture,
+    normalMap: bushNormalTexture
+})
 
 const bush1 = new THREE.Mesh(bushGeometry, bushMaterial)
 bush1.scale.set(0.5, 0.5, 0.5)
@@ -85,7 +248,13 @@ house.add(bush1, bush2, bush3, bush4)
 
 //  Graves
 const graveGeometry = new THREE.BoxGeometry(0.6, 0.8, 0.2)
-const graveMaterial = new THREE.MeshStandardMaterial()
+const graveMaterial = new THREE.MeshStandardMaterial({
+    map: graveColorTexture,
+    aoMap: graveARMTexture,
+    roughnessMap: graveARMTexture,
+    metalnessMap: graveARMTexture,
+    normalMap: graveNormalTexture
+})
 
 const graves = new THREE.Group()
 scene.add(graves)
