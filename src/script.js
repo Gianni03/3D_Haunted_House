@@ -76,9 +76,9 @@ const roofNormalTexture = textureLoader.load('./roof/roof_slates_02_1k/roof_slat
 
 roofColorTexture.colorSpace = THREE.SRGBColorSpace
 
-roofColorTexture.repeat.set(3,1)
-roofARMTexture.repeat.set(3,1)
-roofNormalTexture.repeat.set(3,1)
+roofColorTexture.repeat.set(3, 1)
+roofARMTexture.repeat.set(3, 1)
+roofNormalTexture.repeat.set(3, 1)
 
 roofColorTexture.wrapS = THREE.RepeatWrapping
 roofARMTexture.wrapS = THREE.RepeatWrapping
@@ -92,9 +92,9 @@ const bushNormalTexture = textureLoader.load('./bush/sparse_grass_1k/sparse_gras
 
 bushColorTexture.colorSpace = THREE.SRGBColorSpace
 
-bushColorTexture.repeat.set(2,1)
-bushARMTexture.repeat.set(2,1)
-bushNormalTexture.repeat.set(2,1)
+bushColorTexture.repeat.set(2, 1)
+bushARMTexture.repeat.set(2, 1)
+bushNormalTexture.repeat.set(2, 1)
 
 bushColorTexture.wrapS = THREE.RepeatWrapping
 bushARMTexture.wrapS = THREE.RepeatWrapping
@@ -129,7 +129,7 @@ graveNormalTexture.repeat.set(0.3, 0.4)
 
 //  Floor
 const floor = new THREE.Mesh(
-    new THREE.PlaneGeometry(20, 20,100, 100),
+    new THREE.PlaneGeometry(20, 20, 100, 100),
     new THREE.MeshStandardMaterial({
         alphaMap: floorAlphaTexture,
         transparent: true,
@@ -162,7 +162,7 @@ const walls = new THREE.Mesh(
         roughnessMap: wallARMTexture,
         metalnessMap: wallARMTexture,
         normalMap: wallNormalTexture
-        
+
     })
 )
 walls.position.y = 1.25
@@ -253,8 +253,8 @@ scene.add(graves)
 for (let i = 0; i < 30; i++) {
 
     const angle = Math.random() * Math.PI * 2
-    const radius = 3 + Math.random() * 4
-    const x  = Math.sin(angle) * radius
+    const radius = 3 + Math.random() * 4 + 0.2
+    const x = Math.sin(angle) * radius
     const z = Math.cos(angle) * radius
     // mesh
     const grave = new THREE.Mesh(graveGeometry, graveMaterial)
@@ -275,14 +275,18 @@ for (let i = 0; i < 30; i++) {
  * Lights
  */
 // Ambient light
-const ambientLight = new THREE.AmbientLight('#ffffff', 0.5)
+const ambientLight = new THREE.AmbientLight('#86cdff', 0.275)
 scene.add(ambientLight)
 
 // Directional light
-const directionalLight = new THREE.DirectionalLight('#ffffff', 1.5)
+const directionalLight = new THREE.DirectionalLight('#86cdff', 1)
 directionalLight.position.set(3, 2, -8)
 scene.add(directionalLight)
 
+// door ligth
+const doorLight = new THREE.PointLight('#ff7d46', 5)
+doorLight.position.set(0, 2.3, 2.3)
+house.add(doorLight)
 /**
  * Sizes
  */
@@ -291,8 +295,7 @@ const sizes = {
     height: window.innerHeight
 }
 
-window.addEventListener('resize', () =>
-{
+window.addEventListener('resize', () => {
     // Update sizes
     sizes.width = window.innerWidth
     sizes.height = window.innerHeight
@@ -334,8 +337,7 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
  */
 const timer = new Timer()
 
-const tick = () =>
-{
+const tick = () => {
     // Timer
     timer.update()
     const elapsedTime = timer.getElapsed()
