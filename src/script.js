@@ -1,5 +1,6 @@
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
+import { Sky } from 'three/addons/objects/Sky.js'
 import { Timer } from 'three/addons/misc/Timer.js'
 import GUI from 'lil-gui'
 
@@ -386,6 +387,21 @@ ghost3.shadow.camera.far = 10
 ghost4.shadow.mapSize.width = 256
 ghost4.shadow.mapSize.height = 256
 ghost4.shadow.camera.far = 10
+
+// sky
+const sky = new Sky()
+sky.scale.setScalar(100)
+scene.add(sky)
+
+sky.material.uniforms['turbidity'].value = 10
+sky.material.uniforms['rayleigh'].value = 3
+sky.material.uniforms['mieCoefficient'].value = 0.01
+sky.material.uniforms['mieDirectionalG'].value = 0.95
+sky.material.uniforms['sunPosition'].value.set(0.3, -0.038, -0.95)
+
+// fog
+
+scene.fog = new THREE.FogExp2('#1d3340', 0.1)
 
 /**
  * Animate
