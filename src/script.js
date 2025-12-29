@@ -344,6 +344,49 @@ const renderer = new THREE.WebGLRenderer({
 renderer.setSize(sizes.width, sizes.height)
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 
+//  shadows
+renderer.shadowMap.enabled = true
+renderer.shadowMap.type = THREE.PCFSoftShadowMap
+
+//  lights
+directionalLight.castShadow = true
+ghost1.castShadow = true
+ghost2.castShadow = true
+ghost3.castShadow = true
+ghost4.castShadow = true
+
+walls.castShadow = true
+walls.receiveShadow = true
+roof.castShadow = true
+floor.receiveShadow = true
+graves.children.forEach((child) => {
+    child.castShadow = true
+    child.receiveShadow = true
+})
+
+// mappping
+directionalLight.shadow.mapSize.width = 256
+directionalLight.shadow.mapSize.height = 256
+directionalLight.shadow.camera.top = 8
+directionalLight.shadow.camera.right = 8
+directionalLight.shadow.camera.bottom = -8
+directionalLight.shadow.camera.left = -8
+directionalLight.shadow.camera.near = 1
+directionalLight.shadow.camera.far = 20
+
+ghost1.shadow.mapSize.width = 256
+ghost1.shadow.mapSize.height = 256
+ghost1.shadow.camera.far = 10
+ghost2.shadow.mapSize.width = 256
+ghost2.shadow.mapSize.height = 256
+ghost2.shadow.camera.far = 10
+ghost3.shadow.mapSize.width = 256
+ghost3.shadow.mapSize.height = 256
+ghost3.shadow.camera.far = 10
+ghost4.shadow.mapSize.width = 256
+ghost4.shadow.mapSize.height = 256
+ghost4.shadow.camera.far = 10
+
 /**
  * Animate
  */
@@ -359,7 +402,7 @@ const tick = () => {
     ghost1.position.x = Math.cos(ghost1Angle) * 4
     ghost1.position.z = Math.sin(ghost1Angle) * 4
     ghost1.position.y = Math.sin(ghost1Angle) * Math.sin(ghost1Angle * 2.34) * Math.sin(ghost1Angle * 3.45)
-    
+
     const ghost2Angle = - elapsedTime * 0.39
     ghost2.position.x = Math.cos(ghost2Angle) * 5
     ghost2.position.z = Math.sin(ghost2Angle) * 5
