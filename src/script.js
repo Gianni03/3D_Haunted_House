@@ -23,10 +23,10 @@ const textureLoader = new THREE.TextureLoader()
 // floor
 const floorAlphaTexture = textureLoader.load('./floor/alpha.jpg')
 
-const floorColorTexture = textureLoader.load('./floor/aerial_rocks_04/aerial_rocks_04_diff_1k.jpg')
-const floorARMTexture = textureLoader.load('./floor/aerial_rocks_04/aerial_rocks_04_arm_1k.jpg')
-const floorNormalTexture = textureLoader.load('./floor/aerial_rocks_04/aerial_rocks_04_nor_gl_1k.jpg')
-const floorDisplacementTexture = textureLoader.load('./floor/aerial_rocks_04/aerial_rocks_04_disp_1k.jpg')
+const floorColorTexture = textureLoader.load('./floor/aerial_rocks_04/aerial_rocks_04_diff_1k.webp')
+const floorARMTexture = textureLoader.load('./floor/aerial_rocks_04/aerial_rocks_04_arm_1k.webp')
+const floorNormalTexture = textureLoader.load('./floor/aerial_rocks_04/aerial_rocks_04_nor_gl_1k.webp')
+const floorDisplacementTexture = textureLoader.load('./floor/aerial_rocks_04/aerial_rocks_04_disp_1k.webp')
 
 floorColorTexture.colorSpace = THREE.SRGBColorSpace
 
@@ -51,9 +51,9 @@ floorDisplacementTexture.wrapS = THREE.RepeatWrapping
 floorDisplacementTexture.wrapT = THREE.RepeatWrapping
 
 // wall texture
-const wallColorTexture = textureLoader.load('./wall/mossy_brick_1k/mossy_brick_diff_1k.jpg')
-const wallARMTexture = textureLoader.load('./wall/mossy_brick_1k/mossy_brick_arm_1k.jpg')
-const wallNormalTexture = textureLoader.load('./wall/mossy_brick_1k/mossy_brick_nor_gl_1k.jpg')
+const wallColorTexture = textureLoader.load('./wall/mossy_brick_1k/mossy_brick_diff_1k.webp')
+const wallARMTexture = textureLoader.load('./wall/mossy_brick_1k/mossy_brick_arm_1k.webp')
+const wallNormalTexture = textureLoader.load('./wall/mossy_brick_1k/mossy_brick_nor_gl_1k.webp')
 
 wallColorTexture.colorSpace = THREE.SRGBColorSpace
 
@@ -71,9 +71,9 @@ wallNormalTexture.wrapS = THREE.RepeatWrapping
 wallNormalTexture.wrapT = THREE.RepeatWrapping
 
 // roof texure
-const roofColorTexture = textureLoader.load('./roof/roof_slates_02_1k/roof_slates_02_diff_1k.jpg')
-const roofARMTexture = textureLoader.load('./roof/roof_slates_02_1k/roof_slates_02_arm_1k.jpg')
-const roofNormalTexture = textureLoader.load('./roof/roof_slates_02_1k/roof_slates_02_nor_gl_1k.jpg')
+const roofColorTexture = textureLoader.load('./roof/roof_slates_02_1k/roof_slates_02_diff_1k.webp')
+const roofARMTexture = textureLoader.load('./roof/roof_slates_02_1k/roof_slates_02_arm_1k.webp')
+const roofNormalTexture = textureLoader.load('./roof/roof_slates_02_1k/roof_slates_02_nor_gl_1k.webp')
 
 roofColorTexture.colorSpace = THREE.SRGBColorSpace
 
@@ -87,9 +87,9 @@ roofNormalTexture.wrapS = THREE.RepeatWrapping
 
 // bush texture
 
-const bushColorTexture = textureLoader.load('./bush/sparse_grass_1k/sparse_grass_diff_1k.jpg')
-const bushARMTexture = textureLoader.load('./bush/sparse_grass_1k/sparse_grass_arm_1k.jpg')
-const bushNormalTexture = textureLoader.load('./bush/sparse_grass_1k/sparse_grass_nor_gl_1k.jpg')
+const bushColorTexture = textureLoader.load('./bush/sparse_grass_1k/sparse_grass_diff_1k.webp')
+const bushARMTexture = textureLoader.load('./bush/sparse_grass_1k/sparse_grass_arm_1k.webp')
+const bushNormalTexture = textureLoader.load('./bush/sparse_grass_1k/sparse_grass_nor_gl_1k.webp')
 
 bushColorTexture.colorSpace = THREE.SRGBColorSpace
 
@@ -114,9 +114,9 @@ doorColorTexture.colorSpace = THREE.SRGBColorSpace
 
 
 // graves texture
-const graveColorTexture = textureLoader.load('./graves/plastered_stone_wall_1k/plastered_stone_wall_diff_1k.jpg')
-const graveARMTexture = textureLoader.load('./graves/plastered_stone_wall_1k/plastered_stone_wall_arm_1k.jpg')
-const graveNormalTexture = textureLoader.load('./graves/plastered_stone_wall_1k/plastered_stone_wall_nor_gl_1k.jpg')
+const graveColorTexture = textureLoader.load('./graves/plastered_stone_wall_1k/plastered_stone_wall_diff_1k.webp')
+const graveARMTexture = textureLoader.load('./graves/plastered_stone_wall_1k/plastered_stone_wall_arm_1k.webp')
+const graveNormalTexture = textureLoader.load('./graves/plastered_stone_wall_1k/plastered_stone_wall_nor_gl_1k.webp')
 
 graveColorTexture.colorSpace = THREE.SRGBColorSpace
 
