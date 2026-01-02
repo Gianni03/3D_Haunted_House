@@ -9,6 +9,8 @@ import GUI from 'lil-gui'
  */
 // Debug
 const gui = new GUI()
+const debugObject = {}
+
 
 // Canvas
 const canvas = document.querySelector('canvas.webgl')
@@ -399,19 +401,31 @@ sky.material.uniforms['mieCoefficient'].value = 0.01
 sky.material.uniforms['mieDirectionalG'].value = 0.95
 sky.material.uniforms['sunPosition'].value.set(0.3, -0.038, -0.95)
 
+
+
 // fog
 
 scene.fog = new THREE.FogExp2('#1d3340', 0.1)
+
+const fogFolder = gui.addFolder('Fog')
+fogFolder.add(scene.fog, 'density').min(0).max(0.2).step(0.001).name('Density')
+fogFolder.addColor(scene.fog, 'color').name('Color')
+
 
 /**
  * Animate
  */
 const timer = new Timer()
 
+debugObject.ghostSpeed = 1
+gui.add(debugObject, 'ghostSpeed').min(0).max(10).step(0.1).name('Ghost Speed')
+
+
 const tick = () => {
     // Timer
     timer.update()
-    const elapsedTime = timer.getElapsed()
+    const elapsedTime = timer.getElapsed() * debugObject.ghostSpeed
+
 
     // ghost
     const ghost1Angle = elapsedTime * 0.5
